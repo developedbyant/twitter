@@ -1,7 +1,7 @@
 {
   "type": "module",
-  "name": "@developedbyant/twitter",
-  "version": "0.0.1",
+  "name": "@developedbyant/twitter-api",
+  "version": "0.0.2",
   "description": "Simple package to use some of the twitter api end-points.",
   "main": "./out/main.js",
   "types": "./out/main.d.ts",

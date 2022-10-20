@@ -4,7 +4,7 @@ import type { FollowersData } from "./types/followersList"
 import type { FollowingsData } from "./types/followingsList"
 import type { SearchData } from "./types/search"
 
-export default class TwitterSearch{
+export default class TwitterApi{
     private token: string
 
     // Class constructor
