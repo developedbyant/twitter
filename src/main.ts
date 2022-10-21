@@ -1,5 +1,6 @@
 import { $get } from "./utils.js"
 import type { UserData } from "./types/user"
+import type { TweetData } from "./types/tweet"
 import type { FollowersData } from "./types/followersList"
 import type { FollowingsData } from "./types/followingsList"
 import type { SearchData } from "./types/search"
@@ -18,6 +19,17 @@ export default class TwitterApi{
     async user(username:string){
         const apiUrl = `users/show.json?screen_name=${username}`
         const apiRes:UserData|false = await $get(this.token,apiUrl)
+        return apiRes
+    }
+
+    /** Get user tweets
+     * @prop {string} userID The user id from user object
+     * @prop {number} count The number of tweets to get (max 100)
+     * https://developer.twitter.com/en/docs/twitter-api/v1/tweets/timelines/api-reference/get-statuses-user_timeline
+    */
+    async tweets(userId:string,count:number=100){
+        const apiUrl = `statuses/user_timeline.json?user_id=${userId}&count=${count}&exclude_replies=true&include_rts=false&trim_user=true`
+        const apiRes:TweetData[]|false = await $get(this.token,apiUrl)
         return apiRes
     }
 
