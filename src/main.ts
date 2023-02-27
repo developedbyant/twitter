@@ -28,6 +28,8 @@ export default class TwitterApi{
      * https://developer.twitter.com/en/docs/twitter-api/v1/tweets/timelines/api-reference/get-statuses-user_timeline
     */
     async tweets(userId:string,count:number=100){
+        /** If count is set it will get replies and retweets and remove them after
+         * So if count is 10 and there is 2 retweets and 3 replies you will get 5 tweets returned to you  */
         const apiUrl = `statuses/user_timeline.json?user_id=${userId}&count=${count}&exclude_replies=true&include_rts=false&trim_user=true`
         const apiRes:TweetData[]|false = await $get(this.token,apiUrl)
         return apiRes
@@ -61,7 +63,7 @@ export default class TwitterApi{
      * https://developer.twitter.com/en/docs/twitter-api/v1/tweets/search/api-reference/get-search-tweets
     */
     async search(query:string,count:number=200){
-        const apiUrl = `search/tweets.json?q=${query}&count=${count}&result_type=recent&include_rts=false&include_entities=true`
+        const apiUrl = `search/tweets.json?q=${query}&count=${count}&result_type=recent&include_rts=false&include_entities=true&lang=en`;
         const apiRes:SearchData|false = await $get(this.token,apiUrl)
         return apiRes
     }

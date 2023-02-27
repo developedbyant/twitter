@@ -11,10 +11,15 @@ const tweeterApi = new TweeterApi(bearerToken)
 
 async function main(){
     // Get user information
-    // const user = await tweeterApi.user("jack")
+    const user = await tweeterApi.user("jack")
+    if(user){
+        console.log(user)
+    }
 
-    const tweets = await tweeterApi.tweets("12",1)
-    console.log(tweets)
+    const tweets = await tweeterApi.tweets("12",10)
+    if(tweets){
+        console.log(tweets.length)
+    }
 
     // const followers = await tweeterApi.followers("12")
 

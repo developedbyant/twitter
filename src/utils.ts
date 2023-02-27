@@ -3,8 +3,18 @@ import { existsSync,readFileSync } from "fs"
 const API_BASE = 'https://api.twitter.com/1.1/'
 const USER_AGENT = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36'
  
-/** Make htpp get request */
+/** Make http get request */
 export async function $get(token:string,url:string):Promise<false|any> {
+    const headers={ 'Authorization':`Bearer ${token}`, "User-Agent":USER_AGENT }
+    const apiReq = await fetch(API_BASE+url,{headers})
+    if(apiReq.status!==200) return false
+    const apiRes:any = await apiReq.json()
+    if(apiRes.hasOwnProperty("error")) return false
+    return apiRes 
+}
+
+/** Make http get request */
+export async function $post(token:string,url:string):Promise<false|any> {
     const headers={ 'Authorization':`Bearer ${token}`, "User-Agent":USER_AGENT }
     const apiReq = await fetch(API_BASE+url,{headers})
     if(apiReq.status!==200) return false
